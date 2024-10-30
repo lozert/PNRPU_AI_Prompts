@@ -1,8 +1,5 @@
 import json
 import base64
-import fitz  # PyMuPDF для работы с PDF
-from PIL import Image
-from pathlib import Path
 from openai import OpenAI
 from user_data import data_image_paths, data_base_url, data_prompt_file_path, data_model_name
 
