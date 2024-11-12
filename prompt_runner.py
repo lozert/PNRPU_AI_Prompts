@@ -3,18 +3,15 @@ import base64
 from openai import OpenAI
 from user_data import data_image_paths, data_base_url, data_prompt_file_path, data_model_name
 
-
 def encode_image(image_path):
     # Конвертируем изображение в base64 для передачи в запросе
     with open(image_path, "rb") as image_file:
         encoded_image = base64.b64encode(image_file.read()).decode("utf-8")
     return f"data:image/jpeg;base64,{encoded_image}"
 
-
 def load_prompt_from_json(prompt_file_path):
     with open(prompt_file_path, "r", encoding="utf-8") as file:
         return json.load(file)
-
 
 def get_response(base_url, messages, model, top_p=0.8):
     client = OpenAI(
@@ -29,7 +26,6 @@ def get_response(base_url, messages, model, top_p=0.8):
         stream_options={"include_usage": True}
     )
     return completion
-
 
 def send_message(prompt_data, image_paths, base_url, model_name):
     messages = []
@@ -60,7 +56,6 @@ def send_message(prompt_data, image_paths, base_url, model_name):
         jtemp = json.loads(chunk.model_dump_json())
         if len(jtemp["choices"]) > 0:
             print(jtemp["choices"][0]["delta"]["content"], end="")
-
 
 if __name__ == "__main__":
     # Пути и настройки
